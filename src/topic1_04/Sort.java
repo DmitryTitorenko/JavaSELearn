@@ -13,13 +13,13 @@ public class Sort {
 
             array[i] = ThreadLocalRandom.current().nextInt(-10, 10 + 1);//ThreadLocalRandom.current().nextInt(min, max + 1);
         }
-        System.out.println(Arrays.toString(array));
-        //System.out.println(Arrays.toString(StudidSorting(array)));
-        System.out.println(Arrays.toString(BubbleSort(array)));
+      //  System.out.println(Arrays.toString(array));
+        //System.out.println(Arrays.toString(studidSorting(array)));
+      //  System.out.println(Arrays.toString(bubbleSort(array)));
 
     }
 
-    public static int[] StudidSorting(int[] array) {
+    public static int[] studidSorting(int[] array) {
         int a1;
         int a2;
         boolean end = false;
@@ -39,7 +39,7 @@ public class Sort {
         return array;
     }
 
-    public static int[] BubbleSort(int[] array) {
+    public static int[] bubbleSort(int[] array) {
         int a1;
         int a2;
         boolean end = false;

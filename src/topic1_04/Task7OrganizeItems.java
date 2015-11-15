@@ -3,7 +3,6 @@ package topic1_04;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Dmitry Titorenko on 08.11.2015.

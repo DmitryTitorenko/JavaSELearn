@@ -17,7 +17,9 @@ public class Task5 {
         double b = s.nextDouble();
         System.out.println("insert c");
         double c = s.nextDouble();
-        double D, x1, x2;
+        double D;
+        double x1;
+        double x2;
         D = Math.pow(b, 2) - 4 * a * c;
         if (D > 0) {
             x1 = ((-b + Math.sqrt(D)) / (2 * a));

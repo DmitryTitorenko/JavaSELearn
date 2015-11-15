@@ -1,6 +1,5 @@
 package topic1_04;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
