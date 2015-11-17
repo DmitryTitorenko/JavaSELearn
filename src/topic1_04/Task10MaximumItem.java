@@ -25,7 +25,7 @@ public class Task10MaximumItem {
         System.out.println(method(array) + "eeee");
     }
 
-    public static double method(double[][] array) {
+    private static double method(double[][] array) {
         double a = 0;
         for (double i[] : array) {
             for (double j : i) {

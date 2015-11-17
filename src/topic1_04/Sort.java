@@ -7,23 +7,29 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Dmitry Titorenko on 09.11.2015.
  */
 public class Sort {
+
     public static void main(String[] args) {
         int[] array = new int[10];
-        for (int i = 0; i < array.length; i++) {
-
-            array[i] = ThreadLocalRandom.current().nextInt(-10, 10 + 1);//ThreadLocalRandom.current().nextInt(min, max + 1);
-        }
-      //  System.out.println(Arrays.toString(array));
-        //System.out.println(Arrays.toString(studidSorting(array)));
-      //  System.out.println(Arrays.toString(bubbleSort(array)));
-
+        fillArray(array);
+        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(studidSorting(array)));
+        fillArray(array);
+        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(bubbleSort(array)));
     }
 
-    public static int[] studidSorting(int[] array) {
+    private static int[] fillArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = ThreadLocalRandom.current().nextInt(-10, +11);//ThreadLocalRandom.current().nextInt(min, max + 1);
+        }
+        return array;
+    }
+
+    private static int[] studidSorting(int[] array) {
         int a1;
         int a2;
         boolean end = false;
-        while (end == false) {
+        while (!end) {
             end = true;
             for (int i = 0; i < array.length - 1; i++) {
                 if (array[i] > array[i + 1]) {
@@ -39,15 +45,13 @@ public class Sort {
         return array;
     }
 
-    public static int[] bubbleSort(int[] array) {
+    private static int[] bubbleSort(int[] array) {
         int a1;
         int a2;
         boolean end = false;
-        while (end == false) {
-            end=true;
-
+        while (!end) {
+            end = true;
             for (int i = 0; i < array.length - 1; i++) {
-
                 if (array[i] > array[i + 1]) {
                     a1 = array[i];
                     a2 = array[i + 1];
@@ -59,5 +63,4 @@ public class Sort {
         }
         return array;
     }
-
 }

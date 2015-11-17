@@ -26,7 +26,7 @@ public class Task6NegativeElements {
         System.out.println(Arrays.toString(method(a)));
     }
 
-    public static double[] method(double[] a) {
+    private static double[] method(double[] a) {
         int count = 0;
         for (int i = 0; i < a.length; i++) {
             if (a[i] < 0) {

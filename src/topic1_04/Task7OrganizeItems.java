@@ -18,11 +18,11 @@ public class Task7OrganizeItems {
         method(array);
     }
 
-    public static Integer[] method(Integer[] a) {
+    private static Integer[] method(Integer[] a) {
         Random random = new Random();
 
         for (int i = 0; i < a.length; i++) {
-            a[i] = -10+random.nextInt(10-(-10)+1);//from + rndGenerator.nextInt(to - from + 1)
+            a[i] = -10 + random.nextInt(10 - (-10) + 1);//from + rndGenerator.nextInt(to - from + 1)
         }
         System.out.println(Arrays.toString(a));
         Arrays.sort(a, 0, 5);

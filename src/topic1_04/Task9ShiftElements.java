@@ -22,7 +22,7 @@ public class Task9ShiftElements {
         System.out.println(Arrays.toString(method(array)));
     }
 
-    public static int[] method(int[] array) {
+    private static int[] method(int[] array) {
         int a = array[0];
 
         for (int i = 0; i < array.length; i++) {

@@ -14,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Вывести на экран оставшиеся положительные значения (простые числа).
  */
 public class Task13SieveOfEratosthenes {
+
     private static double[] array = new double[300];
 
     public static void main(String[] args) {

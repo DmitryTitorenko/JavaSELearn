@@ -22,7 +22,7 @@ public class Task8ArithmeticAverage {
         System.out.println(method(array));
     }
 
-    public static int method(int[] array) {
+    private static int method(int[] array) {
         int a = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] % 2 == 0 && (i & 1) != 0) {//остаток от деления и побитовое сравнение

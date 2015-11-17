@@ -23,7 +23,7 @@ public class Task12MaxOfMin {
         System.out.println("Max of array: " + method(array));
     }
 
-    public static int method(int[][] array) {
+    private static int method(int[][] array) {
         int a[] = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             a[i] = array[i][0];
