@@ -22,9 +22,9 @@ public class Task21recursion {
         System.out.printf("Наименьшее слогаемое:" + e + "%n\u03C0:" + p);
     }
 
-    public static void math() {
+    private static void math() {
         if (e > c) {
-            if (eee == true) {
+            if (eee) {
                 e = 4 / (a1 * a2 * a3);
                 p += e;
                 a1 += 2;

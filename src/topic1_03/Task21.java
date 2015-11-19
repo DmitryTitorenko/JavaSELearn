@@ -24,7 +24,7 @@ public class Task21 {
         double c = new Scanner(System.in).nextDouble();//точноть
 
         while (e > c) {
-            if (eee == true) {
+            if (eee) {
                 e = 4 / (a1 * a2 * a3);
                 p += e;
                 a1 += 2;

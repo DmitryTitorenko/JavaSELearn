@@ -15,7 +15,7 @@ public class Task15 {
         System.out.println(signum(c));
     }
 
-    public static int signum(int a) {
+    private static int signum(int a) {
         if (a < 0) {
             return -1;
         } else if (a > 0) {

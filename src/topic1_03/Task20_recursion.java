@@ -13,7 +13,7 @@ public class Task20_recursion {
         fibonachi(a);
     }
 
-    public static void fibonachi(int a) {
+    private static void fibonachi(int a) {
         System.out.println(b2);
 
         b1 = b1 + b2;

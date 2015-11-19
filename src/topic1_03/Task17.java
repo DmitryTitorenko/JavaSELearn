@@ -16,13 +16,12 @@ public class Task17 {
         out(b);
     }
 
-    public static int insert() {
+    private static int insert() {
         Scanner s = new Scanner(System.in);
-        int a = s.nextInt();
-        return a;
+        return s.nextInt();
     }
 
-    public static int calculation(int a) {
+    private static int calculation(int a) {
         int b = 1;
         for (int i = 1; i <= a; i++) {
             b *= i;
@@ -30,7 +29,7 @@ public class Task17 {
         return b;
     }
 
-    public static void out(int a) {
+    private static void out(int a) {
         System.out.println(a);
     }
 }

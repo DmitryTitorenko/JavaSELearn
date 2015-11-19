@@ -26,7 +26,7 @@ public class Task5 {
             x2 = ((-b - Math.sqrt(D)) / (2 * a));// не верно без ()//2*а
             System.out.printf("x1=" + x1 + " x2=" + x2);
         } else if (D == 0) {
-            x1 = x2 = b / 2 * a;
+            x1 = b / 2 * a;
             System.out.printf("x1=x2=" + x1);
         } else if (D < 0) {
             System.out.println("NULL");

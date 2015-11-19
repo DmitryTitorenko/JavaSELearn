@@ -18,13 +18,13 @@ public class Task19 {
         int b = s.nextInt();
         for (int i = a; i < b; i++) {
             isPrime(i);
-            if (isPrime(i) == true) {
+            if (isPrime(i)) {
                 System.out.println(i);
             }
         }
     }
 
-    public static boolean isPrime(int N) {
+    private static boolean isPrime(int N) {
         if (N < 2) return false;
         for (int i = 2; i * i <= N; i++)
             if (N % i == 0) return false;

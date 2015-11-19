@@ -19,7 +19,7 @@ public class Task12 {
             if (a == 1) {
                 c = true;
             }
-            if (c == true) {
+            if (c) {
                 System.out.print(a);
             }
         }

@@ -17,7 +17,7 @@ public class Task18 {
         System.out.println(b);
     }
 
-    public static int recursion(int a) {
+    private static int recursion(int a) {
         if (a <= 0) {
             return c;
         } else {
