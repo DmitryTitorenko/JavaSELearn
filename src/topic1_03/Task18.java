@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by Dmitry Titorenko on 04.11.2015.
- *
+ * <p>
  * Реализовать программу вычисления факториала с помощью рекурсивной функции.
  */
 public class Task18 {
@@ -12,8 +12,8 @@ public class Task18 {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        int a = s.nextInt();
-        int b = recursion(a);
+        int d = s.nextInt();
+        int b = recursion(d);
         System.out.println(b);
     }
 

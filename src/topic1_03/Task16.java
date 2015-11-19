@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by Dmitry Titorenko on 03.11.2015.
- *
+ * <p>
  * Реализовать и протестировать функцию, которая вычисляет наименьшее
  * общее кратное двух чисел путем деления произведения чисел на наибольший общий делитель.
  */
@@ -17,13 +17,13 @@ public class Task16 {
         System.out.println(c);
     }
 
-    private static int greatestCommonDivisor(int a, int c) {//Наибольший общий делитель
-        while (a != c) {
-            if (a < c) {
-                c -= a;
+    private static int greatestCommonDivisor(int a, int b) {//Наибольший общий делитель
+        while (a != b) {
+            if (a < b) {
+                b -= a;
             }
-            if (a > c) {
-                a -= c;
+            if (a > b) {
+                a -= b;
             }
         }
         return a;
