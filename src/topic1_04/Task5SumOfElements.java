@@ -47,11 +47,7 @@ public class Task5SumOfElements {
                 sumafterk += a[i];
             }
         }
-        if (sumbeforek > sumafterk) {
-            b = true;
-        } else {
-            b = false;
-        }
+        b = sumbeforek > sumafterk;
         return b;
     }
 }

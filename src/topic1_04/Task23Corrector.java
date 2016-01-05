@@ -1,5 +1,7 @@
 package topic1_04;
 
+import com.sun.xml.internal.ws.server.ServerRtException;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,20 +21,22 @@ public class Task23Corrector {
         String makeLittleWords = makeLittleWords(words);
         System.out.println(makeLittleWords);
         String makePoint = makePoint(makeLittleWords);
-        // System.out.println(makePoint);
+        System.out.println(makePoint);
+        String selectLetter = selectLetter(makePoint);
+        System.out.println(selectLetter);
     }
 
     private static String deleteSpace() {
         Scanner s = new Scanner(System.in);
         String words = s.nextLine();
-        if (words.contains("  ")) {
-            words = words.replaceAll("  ", " ");
-        }
         if (words.indexOf(" ") == 0) {
             words = words.substring(1, words.length());
         }
-        if (words.lastIndexOf(" ") != -1) {//ошибка
+        if (words.lastIndexOf(" ") == words.length() - 1) {
             words = words.substring(0, words.length() - 1);
+        }
+        if (words.contains("  ")) {
+            words = words.replaceAll("  ", " ");
         }
         return words;
     }
@@ -40,7 +44,8 @@ public class Task23Corrector {
     private static String makeLittleWords(String a) {
         String[] ee = a.split(" ");
         String result = "";
-        for (String as : ee) {
+        for (int iii = 0; iii < ee.length; iii++) {
+            String as = ee[iii];
             char[] linechar = as.toCharArray();
             for (int i = 0; i < linechar.length; i++) {
                 if (i == 0) {
@@ -50,28 +55,45 @@ public class Task23Corrector {
                         result += Character.toLowerCase(linechar[i]);
                     } else {
                         result += linechar[i];
-
                     }
                 }
             }
-            result += " ";
+            if (iii != ee.length - 1) {
+                result += " ";
+            }
         }
-
         return result;
     }
 
+    //GRGRGgf. RGRG GHrgrh ьывашуЩВАО ЬщывашсДШВА
     private static String makePoint(String a) {
+        String result = "";
         String[] ee = a.split(" ");
-        int i = 1;
-        for (String qa : ee) {
-            char[] asd = qa.toCharArray();
-            if (Character.isUpperCase(asd[0])) {
-                ee[i - 1] = ee[i - 1] + ".";
-
+        for (int i = 0; i < ee.length; i++) {
+            char[] ou = ee[i].toCharArray();
+            if (Character.isUpperCase(ou[0]) && i != 0) {//did't add "." to first word
+                if (!ee[i - 1].contains(".")) {// check for contain "." in previous word
+                    ee[i - 1] += ".";
+                }
             }
-
         }
-        return Arrays.toString(ee);
+        for (int i = 0; i < ee.length; i++) {
+            result += ee[i];
+            if (i != ee.length - 1) {
+                result += " ";
+            }
+        }
+        return result;
+    }
 
+    private static String selectLetter(String a) {
+        String[] ee = a.split(" ");
+        String result = "";
+        for (String s : ee) {
+            if (s.indexOf("ь") == 0 || s.indexOf("Ь") == 0) {
+                result += s + " ";
+            }
+        }
+        return result;
     }
 }

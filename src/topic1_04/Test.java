@@ -25,20 +25,12 @@ public class Test<T> extends AbstractQueue<T> {
             public boolean hasNext() {
                 boolean end;
                 if (indexfirst < array.length) {
-                    if (array[indexfirst] == null) {
-                        end = true;
-                    } else {
-                        end = false;
-                    }
+                    end = array[indexfirst] == null;
                 } else {
                     remove();
 
                     indexfirst = 0;
-                    if (array[indexfirst] == null) {
-                        end = true;
-                    } else {
-                        end = false;
-                    }
+                    end = array[indexfirst] == null;
                 }
                 return end;
             }
