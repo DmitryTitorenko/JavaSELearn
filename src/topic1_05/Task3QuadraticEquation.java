@@ -2,7 +2,7 @@ package topic1_05;
 
 /**
  * Created by Dmitry Titorenko on 31.01.2016.
- *
+ * <p>
  * Квадратное уравнение
  * Спроектировать класс для решения квадратного уравнения.
  */
@@ -18,7 +18,6 @@ class QuadraticEquation {
     private int a;
     private int b;
     private int c;
-    private double d;
     public double x1;
     public double x2;
 
@@ -29,7 +28,7 @@ class QuadraticEquation {
     }
 
     public void solve() {
-        d = Math.pow(b, 2) - 4 * a * c;
+        double d = Math.pow(b, 2) - 4 * a * c;
         if (d > 0) {
             x1 = (-b + Math.sqrt(d)) / (2 * a);
             x2 = (-b - Math.sqrt(d)) / (2 * a);

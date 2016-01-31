@@ -33,13 +33,13 @@ class ArraysArticle {
 
     }
 
-    public static void addArticle(String title, int prise) {
+    private static void addArticle(String title, int prise) {
         Task2SimpleArticle[] b = Arrays.copyOf(a, a.length + 1);
         b[a.length] = new Task2SimpleArticle(title, prise);
         a = b;
     }
 
-    public static Task2SimpleArticle getId(int id) {
+    private static Task2SimpleArticle getId(int id) {
         return a[id];
     }
 }

@@ -20,8 +20,8 @@ public class Task5ComplexNumbers {
 }
 
 class ComplexN {
-    public double a;
-    public double bi;
+    private double a;
+    private double bi;
 
     public ComplexN(double a, double bi) {
         this.a = a;
@@ -29,19 +29,16 @@ class ComplexN {
     }
 
     public static ComplexN sum(ComplexN first, ComplexN second) {
-        ComplexN result = new ComplexN(first.a + second.a, first.bi + second.bi);
-        return result;
+        return new ComplexN(first.a + second.a, first.bi + second.bi);
     }
 
     public static ComplexN subtraction(ComplexN first, ComplexN second) {
-        ComplexN result = new ComplexN(first.a - second.a, first.bi - second.bi);
-        return result;
+        return new ComplexN(first.a - second.a, first.bi - second.bi);
     }
 
     public static ComplexN multiplication(ComplexN first, ComplexN second) {
-        ComplexN result = new ComplexN(first.a * second.a + first.bi * second.bi * -1,
+        return new ComplexN(first.a * second.a + first.bi * second.bi * -1,
                 first.bi * second.a + first.a * second.bi);
-        return result;
     }
 
     public static ComplexN division(ComplexN first, ComplexN second) {
@@ -49,13 +46,11 @@ class ComplexN {
                 first.bi * second.a + first.a * second.bi * -1);
 
         double denominator = Math.pow(second.a, 2) + Math.pow(second.bi, 2);
-        ComplexN result = new ComplexN(numerator.a / denominator, numerator.bi / denominator);
-        return result;
+        return new ComplexN(numerator.a / denominator, numerator.bi / denominator);
     }
 
     public static ComplexN multiplicationConstant(ComplexN first, int a) {
-        ComplexN result = new ComplexN(first.a * a, first.bi * a);
-        return result;
+        return new ComplexN(first.a * a, first.bi * a);
     }
 
     @Override

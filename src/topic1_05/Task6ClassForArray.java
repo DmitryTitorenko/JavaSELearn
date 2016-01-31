@@ -1,6 +1,5 @@
 package topic1_05;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -18,11 +17,10 @@ public class Task6ClassForArray {
         a.delete();
         System.out.println(a);
     }
-
 }
 
 class ArrayForDouble {
-    double[] array;
+    private double[] array;
 
     public ArrayForDouble(double a) {
 
@@ -36,8 +34,7 @@ class ArrayForDouble {
     }
 
     public void delete() {
-        double[] a = Arrays.copyOf(array, array.length - 1);
-        array = a;
+        array = Arrays.copyOf(array, array.length - 1);
     }
 
     @Override

@@ -18,9 +18,8 @@ public class Task4SimpleFractions {
 }
 
 class SimpleFraction {
-    public int numerator;
-    public int denominator;
-    public static int e;
+    private int numerator;
+    private int denominator;
 
     SimpleFraction(int numerator, int denominator) {
         this.numerator = numerator;
@@ -28,8 +27,7 @@ class SimpleFraction {
     }
 
     public static SimpleFraction a(SimpleFraction a, SimpleFraction b) {
-        SimpleFraction c = new SimpleFraction(a.numerator * b.numerator, a.denominator * b.denominator);
-        return c;
+        return new SimpleFraction(a.numerator * b.numerator, a.denominator * b.denominator);
     }
 
     public void pow(int pow) {
