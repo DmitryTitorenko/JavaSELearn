@@ -8,12 +8,9 @@ public class MyInstanseof {
         First first = new First(1);
         First first1 = new First(1);
         System.out.println(first.equals(first1));
-        Second second = new Second(1, 10);
+        Second second = new Second(1);
         System.out.println(first.equals(second));
         System.out.println(second.equals(first));
-        System.out.println(first.toString() + first1);
-
-
     }
 }
 
@@ -44,11 +41,9 @@ class First {
 }
 
 class Second extends First {
-    private int age;
 
-    public Second(int id, int age) {
+    public Second(int id) {
         super(id);
-        this.age = age;
     }
     // не переопределяем equals т.к. он нас устравивает-сравлнивает по id
 }

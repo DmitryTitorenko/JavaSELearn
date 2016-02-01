@@ -1,8 +1,5 @@
 package topic1_04;
 
-import com.sun.xml.internal.ws.server.ServerRtException;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**

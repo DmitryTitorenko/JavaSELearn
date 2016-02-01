@@ -9,7 +9,12 @@ public class MyClone implements Cloneable {
     public static void main(String[] args) throws CloneNotSupportedException {
         Human human = new Human(10, "go", new int[]{5, 5, 5, 5});
         Human a = (Human) human.clone();
-
+        System.out.println(a.toString());
+        human.setName("Wo");
+        human.setSome(new int[]{8, 8, 8, 8});
+        human.setAge(20);
+        System.out.println(human.toString());
+        System.out.println(a.toString());
     }
 }
 
@@ -36,13 +41,15 @@ class Human implements Cloneable {
         return human;
     }
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-        Human human = new Human(10, "go", new int[]{5, 5, 5, 5});
-        Human a = (Human) human.clone();
-        System.out.println(a.toString());
-        human.some[0] = 10;
-        human.age = 99;
-        System.out.println(human.toString());
-        System.out.println(a.toString());
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSome(int[] some) {
+        this.some = some;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

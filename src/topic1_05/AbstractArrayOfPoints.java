@@ -80,7 +80,7 @@ public abstract class AbstractArrayOfPoints {
 }
 
 class ArrayOfPointObjects extends AbstractArrayOfPoints {
-    Point[] point = {};
+    private Point[] point = {};
 
     @Override
     public void setPoint(int i, int x, int y) {
@@ -111,8 +111,7 @@ class ArrayOfPointObjects extends AbstractArrayOfPoints {
 
     @Override
     public void deleleteLastPoint() {
-        Point[] ggg = Arrays.copyOf(point, getAllCountPoint() - 1);
-        point = ggg;
+        point = Arrays.copyOf(point, getAllCountPoint() - 1);;
     }
 
     public static void main(String[] args) {
@@ -122,8 +121,8 @@ class ArrayOfPointObjects extends AbstractArrayOfPoints {
 }
 
 class Point {
-    int x;
-    int y;
+    private int x;
+    private int y;
 
     Point(int x, int y) {
         this.x = x;

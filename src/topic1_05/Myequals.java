@@ -1,6 +1,5 @@
 package topic1_05;
 
-import java.util.PrimitiveIterator;
 
 /**
  * Created by Dmitry Titorenko on 09.01.2016.
@@ -34,8 +33,8 @@ class B {
         this.s2 = s2;
     }
 
-    private String s1 = null;
-    private String s2 = null;
+    private String s1;
+    private String s2;
 }
 
 class D {

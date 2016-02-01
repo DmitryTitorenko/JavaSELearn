@@ -1,6 +1,5 @@
 package topic1_04;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -9,8 +8,8 @@ import java.util.*;
 public class Test<T> extends AbstractQueue<T> {
 
     private Object[] array;
-    int indexfirst;
-    int indexend;
+    private int indexfirst;
+    private int indexend;
 
     public Test(int size, int indexfirst, int indexend) {
         array = new Object[size];

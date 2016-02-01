@@ -11,10 +11,10 @@ import java.util.Arrays;
  */
 public class Task19SortingLines {
     public static void main(String[] args) {
-        System.out.println(SortingLines());
+        System.out.println(sortingLines());
     }
 
-    private static String SortingLines() {
+    private static String sortingLines() {
         String[] s = {"f", "g", "w", "a"};
         Arrays.sort(s);
         String result = "";
