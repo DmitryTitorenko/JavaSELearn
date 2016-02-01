@@ -68,10 +68,9 @@ public class Task23Corrector {
         String[] ee = a.split(" ");
         for (int i = 0; i < ee.length; i++) {
             char[] ou = ee[i].toCharArray();
-            if (Character.isUpperCase(ou[0]) && i != 0) {//did't add "." to first word
-                if (!ee[i - 1].contains(".")) {// check for contain "." in previous word
-                    ee[i - 1] += ".";
-                }
+            //did't add "." to first word &&check for contain "." in previous word
+            if (Character.isUpperCase(ou[0]) && i != 0 && !ee[i - 1].contains(".")) {
+                ee[i - 1] += ".";
             }
         }
         for (int i = 0; i < ee.length; i++) {

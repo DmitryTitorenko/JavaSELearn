@@ -111,7 +111,7 @@ class ArrayOfPointObjects extends AbstractArrayOfPoints {
 
     @Override
     public void deleleteLastPoint() {
-        point = Arrays.copyOf(point, getAllCountPoint() - 1);;
+        point = Arrays.copyOf(point, getAllCountPoint() - 1);
     }
 
     public static void main(String[] args) {

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Task22Abbreviation {
     public static void main(String[] args) {
         String[] splitString = splitString();
-        String firstwords = Firstwords(splitString);
+        String firstwords = firstWords(splitString);
         String touppercase = mytoUpperCase(firstwords);
         System.out.println(touppercase);
     }
@@ -23,7 +23,7 @@ public class Task22Abbreviation {
         return words.split(" ");
     }
 
-    private static String Firstwords(String[] splitString) {
+    private static String firstWords(String[] splitString) {
         String firstwords = "";
         for (String s : splitString) {
             firstwords += String.valueOf(s.charAt(0));
