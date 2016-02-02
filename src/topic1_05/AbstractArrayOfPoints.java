@@ -68,6 +68,7 @@ public abstract class AbstractArrayOfPoints {
         addPoint(4, 11);
         addPoint(30, 5);
         addPoint(-2, 48);
+
         System.out.println(this);
 
         sortX();
@@ -76,6 +77,7 @@ public abstract class AbstractArrayOfPoints {
         System.out.println(this);
         deleleteLastPoint();
         System.out.println(this);
+
     }
 }
 
