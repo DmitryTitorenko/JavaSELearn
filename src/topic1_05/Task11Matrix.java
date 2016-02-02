@@ -60,12 +60,9 @@ class Matrix implements Cloneable {
         if (!(obj instanceof Matrix))
             return false;
         Matrix a = (Matrix) obj;
-        boolean end = true;
-        for (int i = 0; i < array.length - 1; i++) {
             if (!(Arrays.deepEquals(array, a.array)))
-                end = false;
-        }
-        return end && this.name.equals(a.name);
+            return false;
+        return   this.name.equals(a.name);
     }
 
     @Override
