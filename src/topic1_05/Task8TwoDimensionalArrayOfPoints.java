@@ -18,7 +18,7 @@ public class Task8TwoDimensionalArrayOfPoints {
 }
 
 class TwoDimensionalArray extends AbstractArrayOfPoints {
-    int[][] array = new int[1][2];
+    private int[][] array = new int[1][2];
 
 
     @Override
