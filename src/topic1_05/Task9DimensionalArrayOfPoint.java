@@ -18,7 +18,7 @@ public class Task9DimensionalArrayOfPoint {
 }
 
 class DimensionalArray extends AbstractArrayOfPoints {
-    int[] array;
+    private int[] array;
 
     @Override
     public void deleleteLastPoint() {
