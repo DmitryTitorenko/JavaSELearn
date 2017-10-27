@@ -1,7 +1,7 @@
 package topic1_05;
 
 /**
- * Created by GrinWey on 14.11.2016.
+ * Created by Dmitry Titorenko on 14.11.2016.
  */
 public class MyCharType {
     public static void main(String[] args) {
