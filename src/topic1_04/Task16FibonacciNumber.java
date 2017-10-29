@@ -15,54 +15,39 @@ import java.util.Scanner;
  * Использовать тип long для представления чисел.
  */
 public class Task16FibonacciNumber {
-    private static final long[] array = new long[92];
-    private static int countarray;
-    private static int end = 0;
+    private static long[] array = new long[92];
+    private static int maxArrayIndex = 0;
 
     public static void main(String[] args) {
-        insert();
-        math(countarray);
+        System.out.println(fibonacciNumber(10));
         System.out.println(Arrays.toString(array));
 
-        insert();
-        math(countarray);
+        System.out.println(fibonacciNumber(6));
+        System.out.println(Arrays.toString(array));
+
+        System.out.println(fibonacciNumber(15));
         System.out.println(Arrays.toString(array));
     }
 
-    private static void insert() {
-        System.out.println("Insert Fibonacci number");
-        Scanner s = new Scanner(System.in);
-        countarray = s.nextInt();
-    }
 
-    private static void math(int a) {
-        if (end == 0) {
-            for (int i = 0; i < a; i++) {
-                if (i == 0 || i == 1) {
-                    array[i] = 1;
-                } else {
-                    array[i] = array[i - 2] + array[i - 1];
-                }
-                end = a;
+    private static long fibonacciNumber(int count) {
+        if (maxArrayIndex == 0) {
+            array[0] = 1;
+            array[1] = 1;
+            for (int i = 2; i < count; i++) {
+                array[i] = array[i - 2] + array[i - 1];
             }
-        } else {
-            if (end < a) {
-                for (int i = end; i < a; i++) {
-                    if (i == 0 || i == 1) {
-                        array[i] = 1;
-                    } else {
-                        array[i] = array[i - 2] + array[i - 1];
-                    }
-                }
-                end = a;
-            } else {
-                if (end > a) {
-                    for (int i = a; i < end; i++) {
-                        array[i] = 0;
-                    }
-                    end = a;
-                }
+            maxArrayIndex = count;
+            return array[count - 1];
+        } else if (count > maxArrayIndex) {
+            for (int i = maxArrayIndex - 1; i < count; i++) {
+                array[i] = array[i - 2] + array[i - 1];
             }
+            maxArrayIndex = count;
+            return array[count - 1];
+        } else if (count < maxArrayIndex) {
+            return array[count - 1];
         }
+        return 0;
     }
 }
