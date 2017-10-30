@@ -12,6 +12,8 @@ package topic1_04;
 public class Task24FormattedTextOutput {
     public static void main(String[] args) {
         String st = " Абстракция — это мощнейшее средство программирования. Именно то, что позволяет нам строить большие системы и поддерживать контроль над ними. Вряд ли мы когда-либо подошли бы хотя бы близко к сегодняшнему уровню программ, если бы не были вооружены таким инструментом. Однако как абстракция соотносится с ООП? ";
+        max30Length(st);
+
         int a = 30;
         int a0 = 0;
         int lastSpace = 0;
@@ -37,6 +39,21 @@ public class Task24FormattedTextOutput {
                 }
             }
             a0 += lastSpace;
+        }
+    }
+
+    //Alternative
+    private static void max30Length(String st) {
+        String[] arrayString = st.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < arrayString.length; i++) {
+            if (arrayString[i].length() + stringBuilder.length() > 30) {
+                System.out.println(stringBuilder);
+                stringBuilder.delete(0, stringBuilder.length() - 1);
+                i--;
+            } else {
+                stringBuilder.append(arrayString[i] + " ");
+            }
         }
     }
 }
