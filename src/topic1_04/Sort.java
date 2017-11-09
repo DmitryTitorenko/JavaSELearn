@@ -63,4 +63,39 @@ public class Sort {
         }
         return array;
     }
+    private static int[] selectionSort(int[] a) {
+        int tempIndex = 0;
+        int tempValue;
+        boolean change = false;
+        for (int i = 0; i < a.length; i++) {
+            tempValue = a[i];
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[j] < tempValue) {
+                    tempValue = a[j];
+                    tempIndex = j;
+                    change = true;
+                }
+            }
+            if (change) {
+                int temp1 = a[i];
+                a[i] = a[tempIndex];
+                a[tempIndex] = temp1;
+            }
+            change = false;
+        }
+        return a;
+    }
+
+    private static int[] InsertSort(int[] a) {
+        int firstIndex;
+        for (int i = 1; i < a.length; i++) {
+            for (int j = i; j > 0 && a[j] < a[j - 1]; j--) {
+                firstIndex = a[j];
+                a[j] = a[j - 1];
+                a[j - 1] = firstIndex;
+            }
+        }
+
+        return a;
+    }
 }
