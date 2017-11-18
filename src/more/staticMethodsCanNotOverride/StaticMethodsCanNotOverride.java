@@ -1,4 +1,4 @@
-package more.static_methods_can_not_override;
+package more.staticMethodsCanNotOverride;
 
 /*
 

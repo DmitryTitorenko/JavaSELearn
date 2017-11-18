@@ -6,7 +6,7 @@ package more;
         The key idea of Factory Method is to delegate decision
         of what instance of class to create inside Factory Method
  */
-public class myFactoryMethod {
+public class MyFactoryMethod {
     public static void main(String[] args) {
 
         /*
