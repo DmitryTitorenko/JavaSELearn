@@ -1,9 +1,9 @@
-package topic1_05;
+package more;
 
 /**
  * Created by Dmitry Titorenko on 05.01.2016.
  */
-public class СompositingVsAggregating {
+public class CompositionVsAggregating {
 
     public static void main(String[] args) {
         PC gamepc = new PC();
@@ -17,7 +17,7 @@ public class СompositingVsAggregating {
     }
 }
 
-//композиция
+//Composition
 class CPU {
     int model;
 
@@ -46,7 +46,7 @@ class PC {
     }
 }
 
-//абстаркция
+//Aggregation
 class Table {
     int type;
 

@@ -12,7 +12,7 @@ public class Task4SimpleFractions {
         SimpleFraction a = new SimpleFraction(2, 3);
         SimpleFraction b = new SimpleFraction(3, 4);
         System.out.println(SimpleFraction.a(a, b));
-        a.pow(2);
+        a.pow(3);
         System.out.println(a);
     }
 }
@@ -31,8 +31,8 @@ class SimpleFraction {
     }
 
     public void pow(int pow) {
-        this.numerator *= pow;
-        this.denominator *= pow;
+        this.numerator = (int) Math.pow(this.numerator, pow);
+        this.denominator = (int) Math.pow(this.denominator, pow);
     }
 
     @Override

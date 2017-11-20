@@ -70,38 +70,61 @@ class DimensionalArray extends AbstractArrayOfPoints {
 
     @Override
     public void sortY() {
-        boolean end = false;
-        while (!end) {
-            end = true;
-            for (int i = 0; i < array.length / 2 + 1; i++) {
-                if (array[i + 1] > array[i + 3]) {
-                    int x = array[i];
-                    int y = array[i + 1];
-                    array[i] = array[i + 2];
-                    array[i + 1] = array[i + 3];
-                    array[i + 2] = x;
-                    array[i + 3] = y;
+        int currentIndexMin;
+        int tempX;
+        int tempY;
+        for (int i = 1; i < array.length; i += 2) {
+            boolean changeMin = false;
+
+            currentIndexMin = i;
+
+            for (int j = i; j < array.length; j += 2) {
+                changeMin = false;
+
+                if (array[j] < array[currentIndexMin]) {
+                    currentIndexMin = j;
+                    changeMin = true;
                 }
+            }
+            if (changeMin) {
+                tempX = array[i - 1];
+                tempY = array[i];
+                array[i - 1] = array[currentIndexMin - 1];
+                array[i] = array[currentIndexMin];
+                array[currentIndexMin - 1] = tempX;
+                array[currentIndexMin] = tempY;
             }
         }
     }
 
+
     @Override
     public void sortX() {
-        boolean end = false;
-        while (!end) {
-            end = true;
-            for (int i = 0; i < array.length / 2 + 1; i++) {
-                if (array[i] > array[i + 2]) {
-                    int x = array[i + 2];
-                    int y = array[i + 3];
-                    array[i + 2] = array[i];
-                    array[i + 3] = array[i + 1];
-                    array[i] = x;
-                    array[i + 1] = y;
-                    end = false;
+        int currentIndexMin;
+        int tempX;
+        int tempY;
+        for (int i = 0; i < array.length; i += 2) {
+            boolean changeMin = false;
+
+            currentIndexMin = i;
+
+            for (int j = i; j < array.length; j += 2) {
+                changeMin = false;
+
+                if (array[j] < array[currentIndexMin]) {
+                    currentIndexMin = j;
+                    changeMin = true;
                 }
+            }
+            if (changeMin) {
+                tempX = array[i];
+                tempY = array[i + 1];
+                array[i] = array[currentIndexMin];
+                array[i + 1] = array[currentIndexMin + 1];
+                array[currentIndexMin] = tempX;
+                array[currentIndexMin + 1] = tempY;
             }
         }
     }
 }
+

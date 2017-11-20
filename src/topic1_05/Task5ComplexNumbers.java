@@ -55,6 +55,6 @@ class ComplexN {
 
     @Override
     public String toString() {
-        return a + "+" + bi + "i";
+        return a + " + " + bi + "i";
     }
 }

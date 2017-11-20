@@ -1,4 +1,4 @@
-package topic1_05;
+package more;
 
 /**
  * Created by Dmitry Titorenko on 25.11.2016.
