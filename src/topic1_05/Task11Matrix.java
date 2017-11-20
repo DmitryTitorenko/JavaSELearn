@@ -17,7 +17,8 @@ public class Task11Matrix {
         Matrix a = new Matrix(10, 10, "go");
         System.out.println(a);
         Matrix b = a.clone();
-        a.setArray(2, 2, 8);
+        a.setArray(2, 2, 9999);
+        System.out.println("after change  "+Arrays.deepToString(b.array));
         System.out.println(a);
         System.out.println(b);
         System.out.println(a.equals(b));
@@ -30,7 +31,7 @@ public class Task11Matrix {
 
 class Matrix implements Cloneable {
     private String name;
-    private int[][] array;
+    public int[][] array;
 
     Matrix(int a, int b, String name) {
         this.name = name;
@@ -48,7 +49,7 @@ class Matrix implements Cloneable {
 
     @Override
     public String toString() {
-        return Arrays.deepToString(array);
+        return this.name + Arrays.deepToString(array);
     }
 
     @Override
@@ -60,19 +61,19 @@ class Matrix implements Cloneable {
         if (!(obj instanceof Matrix))
             return false;
         Matrix a = (Matrix) obj;
-            if (!(Arrays.deepEquals(array, a.array)))
+        if (!(Arrays.deepEquals(array, a.array)))
             return false;
-        return   this.name.equals(a.name);
+        return this.name.equals(a.name);
     }
 
     @Override
     protected Matrix clone() throws CloneNotSupportedException {
         Matrix m = (Matrix) super.clone();
-        int[][] a = array.clone();
-        for (int i = 0; i < a.length; i++) {
-            a[i] = array[i].clone();
+        int a[][]=this.array.clone();
+        for (int i = 0; i <this.array.length; i++) {
+            a[i]=this.array[i].clone();
         }
-        m.array = a;
+        m.array=a;
         return m;
     }
 }

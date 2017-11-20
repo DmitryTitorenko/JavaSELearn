@@ -30,15 +30,25 @@ public class BitwiseOperators {
         toBits(b11);
         System.out.println(b11);
         System.out.println();
+
+
+        byte a = 127;
+        toBits(a);
+        a++;
+        toBits(a);
+        System.out.println(a);
+        a++;
+        toBits(a);
+        System.out.println(a);
+
     }
 
     private static void toBits(byte b) {
-        String result = "";
-
-        for (int i = 7; i >= 0; i--) {
-            result += (byte) (1 & (b >> i));
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte i = 7; i >= 0; i--) {
+            stringBuilder.append(1 & (b >> i));
         }
-        System.out.println(result);
+        System.out.println(stringBuilder);
     }
 }
 
