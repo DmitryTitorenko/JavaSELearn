@@ -19,7 +19,9 @@ public class CompositionVsAggregating {
 
 //Composition
 class CPU {
-    int model;
+    private int model;
+    private final int id=0;
+    private final boolean testBoolean=false;
 
     public int getCPU() {
         return model;
@@ -28,10 +30,18 @@ class CPU {
     public void setCPU(int model) {
         this.model = model;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean getTestBoolean(){
+        return testBoolean;
+    }
 }
 
 class PC {
-    CPU cpu;
+    private CPU cpu;
 
     PC() {
         cpu = new CPU();
@@ -48,7 +58,7 @@ class PC {
 
 //Aggregation
 class Table {
-    int type;
+    private int type;
 
     public void setType(int type) {
         this.type = type;
