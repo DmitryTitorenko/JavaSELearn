@@ -11,6 +11,7 @@ public class ClassInherit2SameInterfaces implements I2, I3, I4 {
     @Override
     public void foo() {
         //I2.super.foo();// don't work
+
         /*
         If TypeName denotes an interface, let T be the type declaration immediately enclosing the method invocation.
          A compile-time error occurs if there exists a method, distinct from the compile-time declaration,
@@ -21,8 +22,8 @@ public class ClassInherit2SameInterfaces implements I2, I3, I4 {
           the grandparent to its list of direct superinterfaces.
            The appropriate way to access functionality of a grandparent is through the direct superinterface,
             and only if that interface chooses to expose the desired behavior.
-
          */
+
         I3.super.foo();
         I4.super.foo();
 
