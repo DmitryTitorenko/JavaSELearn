@@ -3,7 +3,11 @@ package more;
 import java.util.function.BiFunction;
 
 public class MyLambda {
+
+    private static int ee = 10; // can change this variable in lambda expression
+
     public static void main(String args[]) {
+        int e = 10;  //try to change this variable in lambda expression (we can't do it)
 
 
         //    This is a functional interface and can therefore be used as
@@ -11,21 +15,34 @@ public class MyLambda {
         BiFunction<Integer, Integer, Integer> some = (a1, a2) -> a1 * a2;
         System.out.println(some.apply(5, 5));
 
-        //  call standard from method
+        // call standard from method
         int intArray[] = {5, 1};
         MyImplementComparator myImplementComparator = new MyImplementComparator();
         CompareNumb.comparingNumberValue(intArray, myImplementComparator);
 
 
-        //  call use lambda - we don't need to define the method  for providing the implementation
-        CompareNumb.comparingNumberValue(intArray, (int first, int second) -> first - second);
+        // call use lambda expression - we don't need to define the method  for providing the implementation
+        CompareNumb.comparingNumberValue(intArray, (first, second) -> first - second);
 
-        //  declare interface variable  'myComparator' with refer to lambda expression, with define the method in interface
-        MyComparator myComparator = (int first, int second) -> first - second;
+        // declare interface variable  'myComparator' with refer to lambda expression, with define the method in interface
+        MyComparator myComparator = (first, second) -> first - second;
         CompareNumb.comparingNumberValue(intArray, myComparator);
 
+        int result = myComparator.compare(4, 1);
+        System.out.println(result);
 
-        //  call use method references
+        // code block
+        myComparator = (first, second) -> {
+            //e=50;     can't change  method variable
+            ee = 30; // can change  class field
+            return first - second + ee;
+        };
+
+        myComparator.compare(3, 1);
+        System.out.println("ee " + ee); //ee=30
+
+
+        // call use method references
         CompareNumb.comparingNumberValue(intArray, myImplementComparator::compare);
 
 
@@ -50,8 +67,8 @@ class MyImplementComparator implements MyComparator {
     }
 }
 
-//Java provides an annotation @FunctionalInterface, which is used to declare an interface as functional interface.
+// Java provides an annotation @FunctionalInterface, which is used to declare an interface as functional interface.
 @FunctionalInterface
 interface MyComparator {
-    int compare(int first, int second);//An interface which has only one abstract method is called functional interface
+    int compare(int first, int second);// An interface which has only one abstract method is called functional interface
 }
