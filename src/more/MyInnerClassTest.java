@@ -82,8 +82,18 @@ class MyOuterClass { // SomeInterface need for show anonymous inner class
      Java Anonymous inner class can be created by two ways:
         -Class (may be abstract or concrete)
         -Interface
-
      */
+
+    public void AnonymousInnerClassExtendAbstract() {
+        SomeAbstractClass someAbstractClass = new SomeAbstractClass() {
+            @Override
+            void someMethod() {
+                System.out.println(a); // can get private int "a";
+            }
+        };
+    }
+
+
     public void AnonymousInnerClass() {
         SomeInterface someInterface = new SomeInterface() {
             @Override
@@ -123,5 +133,26 @@ interface SomeInterface {
         /*
         Inner classes that are declare inside an interface are automatically static and public
          */
+    }
+}
+
+/*
+ Abstract class for show anonymous inner class
+ */
+abstract class SomeAbstractClass {
+    int a;
+
+    SomeAbstractClass() {
+    }
+
+    abstract void someMethod();
+}
+
+class InterfaceInsideClassInsideInterface {
+    interface Interface {
+        class ClassInsideInterface {
+            interface More {
+            }
+        }
     }
 }
