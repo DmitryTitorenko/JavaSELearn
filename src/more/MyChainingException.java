@@ -15,10 +15,19 @@ Chained Exceptions allows to relate one exception with another exception, i.e on
  */
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MyChainingException {
+
+    /*
+A logger tha is not referenced by any variable can be garbage collected.
+To prevent this, save a reference to the logger with a static variable, as in the example above.
+ */
+    private static final Logger myLogger = Logger.getLogger(MyChainingException.class.getName());
+
     public static void main(String[] args) {
-        try(Scanner scanner= new Scanner(System.in)){
+        try (Scanner scanner = new Scanner(System.in)) {
             try {
                 chainingException();
             } catch (Exception e) {
@@ -28,20 +37,20 @@ public class MyChainingException {
 
                 // Getting the actual cause of the exception
                 System.out.println(e.getCause());
-            }
 
-            finally {
-                System.out.println("go");
+                myLogger.log(Level.INFO, "Exception", e);
+
+            } finally {
+                System.out.println("finally");
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println();
         }
         System.out.println("after exception");
-
+        myLogger.info("my Log Info");
     }
 
-    public static void chainingException() {
+    public static void chainingException() throws NullPointerException {
 
         // Creating an exception
         NullPointerException exception = new NullPointerException("Exception");
@@ -52,6 +61,4 @@ public class MyChainingException {
         // Throwing an exception with cause.
         throw exception;
     }
-
 }
-
