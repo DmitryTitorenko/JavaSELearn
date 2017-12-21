@@ -2,33 +2,25 @@ package more;
 
 public class MyGenericClass {
     public static void main(String[] args) {
-        Generic<String> stringGeneric = new Generic<>();
-        System.out.println(stringGeneric.getT());
-        stringGeneric = new Generic<>("String...");
+        MyGeneric<String> stringGeneric = new MyGeneric<>();
         System.out.println(stringGeneric.getT());
 
         stringGeneric.getVoidFirst("one ", "two");
         System.out.println(stringGeneric.getFirst("one", "two"));
 
-        String st = stringGeneric.<String>getFirst("1.1");// can place the actual types in angle brackets
+        String st = stringGeneric.getFirst("1.1");
         System.out.println(st);
-
-        st = stringGeneric.getFirst("1");// can omit the <String> type parameter
-        System.out.println(st);
-
-        Generic<CPU> cpuGeneric = new Generic<>();
-        CPU cpu = new CPU();
     }
 }
 
-class Generic<T> {
+class MyGeneric<T> {
     private T t;
 
-    public Generic() {
+    public MyGeneric() {
         this.t = null;
     }
 
-    public Generic(T t) {
+    public MyGeneric(T t) {
         this.t = t;
     }
 
@@ -65,7 +57,6 @@ class Generic<T> {
         }
         return smallest;
     }
-
 }
 
 
