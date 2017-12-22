@@ -1,5 +1,9 @@
 package more;
 
+/*
+    If you want to enforce some relationship on the different types of method arguments,
+     you can't do that with wildcards, you have to use type parameters.
+ */
 public class MyWildcardTypeVsGenericMethod {
     public static void main(String[] args) {
         WildcardType<String> wildcardType = new WildcardType<>();
@@ -84,6 +88,10 @@ class WildcardType<T> {
      public <T super Integer> void print(List<T> list)  // Won't compile
 
      */
+
+    public static <T extends Comparable<? super T>> void wildcardPlusGenericMethod(WildcardType<? extends Integer> t) {
+
+    }
 
 
 }
