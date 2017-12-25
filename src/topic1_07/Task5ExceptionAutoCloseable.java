@@ -11,7 +11,7 @@ package topic1_07;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Task4ExceptionAutoCloseable {
+public class Task5ExceptionAutoCloseable {
     public static void main(String[] args) {
         test(3);
 
