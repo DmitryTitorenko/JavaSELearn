@@ -13,15 +13,16 @@ public class Task3ArithmeticMiddling {
     public static void main(String[] args) {
         Collection<Integer> arrayList = new ArrayList<>(Arrays.asList(5, 8, -4, 8, -2, 4, -7, 3));
 
-        Collection<Integer> integers = toPriorityQueue(arrayList);
-
-        System.out.println(integers);
+        PriorityQueue<Integer> integers = toPriorityQueue(arrayList);
         System.out.println(arithmeticMiddling(integers));
 
+        while (!integers.isEmpty()) {
+            System.out.println(integers.remove());
+        }
     }
 
-    public static Collection<Integer> toPriorityQueue(Collection<Integer> integers) {
-        Collection<Integer> integers1 = new PriorityQueue<>();
+    public static PriorityQueue<Integer> toPriorityQueue(Collection<Integer> integers) {
+        PriorityQueue<Integer> integers1 = new PriorityQueue<>();
         for (Integer integer : integers) {
             integers1.add(Math.abs(integer));
         }
@@ -29,10 +30,9 @@ public class Task3ArithmeticMiddling {
     }
 
     public static double arithmeticMiddling(Collection<Integer> integers) {
-        Iterator<Integer> integerIterator = integers.iterator();
         double a = 0;
-        while (integerIterator.hasNext()) {
-            a += integerIterator.next();
+        for (int i : integers) {
+            a += i;
         }
         return a / integers.size();
     }
