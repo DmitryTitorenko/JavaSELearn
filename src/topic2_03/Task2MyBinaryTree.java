@@ -2,28 +2,26 @@ package topic2_03;
 
 /**
  * @author Dmitry Titorenko on 21.01.2018
+ * <p>
+ * 3.2 Реализация функции удаления элемента из дерева
+ * Добавить к примеру 2.2 функцию удаления заданного элемента из дерева.
  */
 public class Task2MyBinaryTree {
 
     public static void main(String[] args) {
         BinaryTree continents = new BinaryTree();
-        continents.addNode(1, "Европа");
-        continents.addNode(3, "Африка");
-        continents.addNode(5, "Австралия");
-        continents.addNode(4, "Америка");
-        continents.addNode(2, "Азия");
-        continents.addNode(6, "Антарктида");
-        continents.addNode(7, "new");
-        //continents.traverseTree();
-        System.out.println(continents.findByIndex(3));
-
-        System.out.println(continents.findNodeWithChild(4));
-
-        System.out.println(continents.deleteByIndex(6));
-
+        continents.addNode(5, "1");
+        continents.addNode(10, "Европа");
+        continents.addNode(8, "Африка");
+        continents.addNode(7, "Австралия");
+        continents.addNode(15, "Америка");
+        continents.addNode(20, "Азия");
+        continents.addNode(25, "Антарктида");
+        continents.addNode(14, "new");
+        continents.addNode(13, "new");
         continents.traverseTree();
-
-
+        System.out.println(continents.deleteByIndex(10));
+        continents.traverseTree();
     }
 }
 
@@ -112,28 +110,50 @@ class BinaryTree {
         return parent;
     }
 
+    /**
+     * Replace parent note link from oldNode to newNode
+     *
+     * @param parent  parent node, with link need to change
+     * @param oldNode this node need to delete
+     * @param newNode replace this node to oldNode
+     */
+    public static void replaceParentLinks(Node parent, Node oldNode, Node newNode) {
+        if (parent.rightChild == oldNode) {
+            parent.rightChild = newNode;
+        } else {
+            parent.leftChild = newNode;
+        }
+    }
 
     public String deleteByIndex(int key) {
-        Node node = findByIndex(key);
+        Node delNode = findByIndex(key);
 
-        if (node != null) {
-            Node parent = findNodeWithChild(node.key);
-
-            if (node.leftChild == null) { //1
-                if (parent.rightChild == node) {
-                    parent.rightChild = node.rightChild;
-
+        if (delNode != null) {
+            Node parentNode = findNodeWithChild(delNode.key);
+            if (delNode.leftChild == null & delNode.rightChild == null) {
+                replaceParentLinks(parentNode, delNode, null);
+            } else if (delNode.leftChild == null) {
+                replaceParentLinks(parentNode, delNode, delNode.rightChild);
+            } else if (delNode.rightChild == null) {
+                replaceParentLinks(parentNode, delNode, delNode.leftChild);
+            } else {
+                Node child = delNode.rightChild;
+                if (child.leftChild == null) {
+                    child.leftChild = delNode.leftChild;
+                    replaceParentLinks(parentNode, delNode, delNode.rightChild);
                 } else {
-                    //parent.leftChild = node.rightChild;
+
+                    // See Thomas H. Cormen Introduction to Algorithms, Third Edition - p.297
+                    Node replaceNode = child.leftChild; // y
+                    child.leftChild = replaceNode.leftChild; // x
+
+                    replaceNode.leftChild = delNode.leftChild; // l
+                    replaceNode.rightChild = delNode.rightChild; //r
+
+                    replaceParentLinks(parentNode, delNode, replaceNode); //parentNode - q; delNode - z;
                 }
-
-
-            } else if (node.rightChild == null) { //2
-
             }
-
-
-            return "Delete - " + node.toString();
+            return "Delete - " + delNode.toString();
         } else {
             return "This key doesn't exist";
         }
