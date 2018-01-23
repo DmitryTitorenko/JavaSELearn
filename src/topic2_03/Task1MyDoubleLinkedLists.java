@@ -6,7 +6,7 @@ package topic2_03;
  * 3.1 Реализация двухсвязного списка*
  * Реализовать обобщенный класс, представляющий двусвязный список
  */
-public class MyDoubleLinkedLists {
+public class Task1MyDoubleLinkedLists {
 
     public static void main(String[] args) {
         MyDoubleLinkedList<Integer> linkedList = new MyDoubleLinkedList<>();
