@@ -83,7 +83,7 @@ public class Test<T> extends AbstractQueue<T> {
         return null;
     }
 
-    public static void main(String[] args) {
+    private static void main(String[] args) {
 
         Test<Integer> myTest = new Test<Integer>(1, 0, 0);
         Iterator<Integer> iteratortest1 = myTest.iterator();
