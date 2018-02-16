@@ -1,4 +1,4 @@
-package topic2_05;
+package more.io;
 
 import java.io.RandomAccessFile;
 
@@ -9,12 +9,10 @@ public class MyRandomAccessFile {
     public static void main(String[] args) {
         randomAccessFileWrite();
         randomAccessFileRead();
-
     }
 
     public static void randomAccessFileWrite() {
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile("C:\\MyRandomAccessFile.txt", "rw")
-        ) {
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile("C:\\MyRandomAccessFile.txt", "rw")) {
             randomAccessFile.writeInt(1);
             randomAccessFile.writeInt(2);
         } catch (Exception e) {
