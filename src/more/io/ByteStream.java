@@ -1,6 +1,7 @@
 package more.io;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -8,19 +9,28 @@ import java.nio.file.Paths;
  */
 public class ByteStream {
     public static void main(String[] args) {
+        Path pathByteStreamRead = Paths.get("C:\\ByteStreamRead.txt");
+        Path pathByteStreamWrite = Paths.get("C:\\ByteStreamWrite.txt");
 
-        if (CheckIsFileExist.checkIsFileExist(Paths.get("C:\\bufferByteStreamRead.txt"),
-                Paths.get("C:\\bufferByteStreamWrite.txt"),
-                Paths.get("C:\\bufferByteStreamRead.txt"),
-                Paths.get("C:\\bufferByteStreamWrite.txt"))){
-            copyBytes();
-            bufferCopyBytes();
+        if (!CheckIsFileExist.addFileIfItDoNotExist(pathByteStreamRead, pathByteStreamWrite)) {
+            writeToFile(pathByteStreamRead);
+        }
+
+        copyBytes(pathByteStreamRead, pathByteStreamWrite);
+        bufferCopyBytes(pathByteStreamRead, pathByteStreamWrite);
+    }
+
+    private static void writeToFile(Path pathByteStreamRead) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathByteStreamRead.toString()))) {
+            bufferedWriter.write("1 1 1");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void copyBytes() {
-        try (FileInputStream in = new FileInputStream("C:\\bufferByteStreamRead.txt");
-             FileOutputStream out = new FileOutputStream("C:\\bufferByteStreamWrite.txt")) {
+    private static void copyBytes(Path pathByteStreamRead, Path pathByteStreamWrite) {
+        try (FileInputStream in = new FileInputStream(pathByteStreamRead.toString());
+             FileOutputStream out = new FileOutputStream(pathByteStreamWrite.toString())) {
             int i;
 
             while ((i = in.read()) != -1) {
@@ -32,11 +42,10 @@ public class ByteStream {
         }
     }
 
-    private static void bufferCopyBytes() {
-        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream("C:\\bufferByteStreamRead.txt"));
-             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("C:\\bufferByteStreamWrite.txt"))) {
+    private static void bufferCopyBytes(Path pathByteStreamRead, Path pathByteStreamWrite) {
+        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(pathByteStreamRead.toString()));
+             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(pathByteStreamWrite.toString()))) {
             out.write(in.readAllBytes());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

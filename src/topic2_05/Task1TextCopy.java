@@ -18,11 +18,27 @@ public class Task1TextCopy {
     public static void main(String[] args) {
         Path pathFrom = Paths.get("C:\\Task1TextCopyFrom.txt");
         Path pathTo = Paths.get("C:\\Task1TextCopyTo.txt");
-        if (CheckIsFileExist.checkIsFileExist(pathFrom, pathTo)) {
-            textCopy(4, pathFrom, pathTo);
+        if (!CheckIsFileExist.addFileIfItDoNotExist(pathFrom, pathTo)) {
+            writeToFile(pathFrom);
         }
+        textCopy(3, pathFrom, pathTo);
     }
 
+    public static void writeToFile(Path path) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.toString()))) {
+
+            bufferedWriter.write("1");
+            bufferedWriter.newLine();
+            bufferedWriter.write("22");
+            bufferedWriter.newLine();
+            bufferedWriter.write("333");
+            bufferedWriter.newLine();
+            bufferedWriter.write("4444");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void textCopy(int matLength, Path pathFrom, Path pathTo) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFrom.toString()));
@@ -30,7 +46,7 @@ public class Task1TextCopy {
             StringBuilder sb = new StringBuilder();
 
             while (!(sb.append(bufferedReader.readLine())).toString().equals("null")) {
-                if (sb.length() < matLength) {
+                if (sb.length() <= matLength) {
                     bufferedWriter.write(sb.toString());
                     bufferedWriter.newLine();
                 }
@@ -41,4 +57,3 @@ public class Task1TextCopy {
         }
     }
 }
-
