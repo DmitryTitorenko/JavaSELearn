@@ -3,9 +3,9 @@ package topic2_05;
 import more.io.CheckIsFileExist;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.PriorityQueue;
 
 /**
  * @author Dmitry Titorenko on 20.02.2018
@@ -19,36 +19,54 @@ import java.nio.file.Paths;
 public class Task3 {
     public static void main(String[] args) {
         Path pathRead = Paths.get("C:\\task3Read.txt");
-        Path pathWriteEvenNumber = Paths.get("C:\\task3EvenNumber.txt");
-        Path pathWriteUnevenNumber = Paths.get("C:\\task3UnEvenNumber.txt");
+        Path pathEvenNumber = Paths.get("C:\\task3EvenNumber.txt");
+        Path pathUnevenNumber = Paths.get("C:\\task3UnEvenNumber.txt");
+        Path pathIncreasingOrder = Paths.get("C:\\task3IncreasingOrder.txt");
 
-        if (!CheckIsFileExist.addFileIfItDoNotExist(pathRead, pathWriteEvenNumber, pathWriteUnevenNumber)) {
+        if (!CheckIsFileExist.addFileIfItDoNotExist(pathRead, pathEvenNumber, pathUnevenNumber)) {
             writeToFile(pathRead);
         }
-        saveNumberFromReadingFile(pathRead, pathWriteEvenNumber, pathWriteUnevenNumber);
+        findNumbersFromFile(pathRead, pathEvenNumber, pathUnevenNumber);
+
+        writeNumbersByOrder(pathEvenNumber, pathUnevenNumber, pathIncreasingOrder);
     }
 
     private static void writeToFile(Path path) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.toString()))) {
-            bufferedWriter.write("1");
+            bufferedWriter.write("22 ");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void saveNumberFromReadingFile(Path pathRead, Path pathEveNumber, Path pathUnevenNumber) {
+    private static void findNumbersFromFile(Path pathRead, Path pathEvenNumber, Path pathUnevenNumber) {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathRead.toString()))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathRead.toString()));
+             DataOutputStream dataOutputStreamEvent = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(pathEvenNumber.toString())));
+             DataOutputStream dataOutputStreamUneven = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(pathUnevenNumber.toString())))) {
+
             StringBuilder sb = new StringBuilder();
+            StringBuilder sbSum = new StringBuilder();
 
             int i = bufferedReader.read();
             if (i != -1) {
                 sb.appendCodePoint(i);
 
                 while (i != -1) {
-                    if (checkIsStringInt(sb.toString())) {
-                        System.out.println(sb.toString());
+                    if (i == 32) {
+
+                        writeNumbers(Integer.parseInt(sbSum.toString()), dataOutputStreamEvent, dataOutputStreamUneven);
+
+                        sbSum.delete(0, sbSum.length());
+
+                    } else {
+
+                        if (checkIsStringInt(sb.toString())) {
+                            sbSum.append(sb.toString());
+
+                        }
                     }
+
                     sb.delete(0, 2);
                     i = bufferedReader.read();
                     if (i != -1) {
@@ -65,6 +83,21 @@ public class Task3 {
         }
     }
 
+    private static void writeNumbers(int i, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
+
+        try {
+            if (i % 2 == 0) {
+                dataOutputStreamEvent.writeInt(i);
+            } else {
+                dataOutputStreamUneven.writeInt(i);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private static boolean checkIsStringInt(String s) {
         boolean end = true;
         try {
@@ -74,5 +107,26 @@ public class Task3 {
             end = false;
         }
         return end;
+    }
+
+    private static void writeNumbersByOrder(Path patEvenNumber, Path pathUnevenNumber, Path pathIncreasingOrder) {
+        try (DataInputStream dataInputStreamEven = new DataInputStream(new BufferedInputStream(new FileInputStream(patEvenNumber.toString())));
+             DataInputStream dataInputStreamUneven = new DataInputStream(new BufferedInputStream(new FileInputStream(pathUnevenNumber.toString())))) {
+
+            PriorityQueue<Integer> integers = new PriorityQueue<>();
+
+            try {
+                while (dataInputStreamEven.available() > 0) {
+                    integers.add(dataInputStreamEven.readInt());
+                }
+            } catch (EOFException e) {
+                e.printStackTrace();
+            }
+            System.out.println(integers.toString());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
