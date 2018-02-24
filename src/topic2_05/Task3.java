@@ -5,6 +5,7 @@ import more.io.CheckIsFileExist;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -17,114 +18,158 @@ import java.util.PriorityQueue;
  * и записать их в новый текстовый файл в порядке убывания. Использовать PriorityQueue для обеспечения упорядоченности чисел.
  */
 public class Task3 {
+
+    private static Path pathRead;
+    private static Path pathEvenNumber;
+    private static Path pathUnevenNumber;
+    private static Path pathIncreasingOrder;
+    private static PriorityQueue<Integer> integers = new PriorityQueue<>(Collections.reverseOrder());
+
+
     public static void main(String[] args) {
-        Path pathRead = Paths.get("C:\\task3Read.txt");
-        Path pathEvenNumber = Paths.get("C:\\task3EvenNumber.txt");
-        Path pathUnevenNumber = Paths.get("C:\\task3UnEvenNumber.txt");
-        Path pathIncreasingOrder = Paths.get("C:\\task3IncreasingOrder.txt");
+        pathRead = Paths.get("C:\\task3Read.txt");
+        pathEvenNumber = Paths.get("C:\\task3EvenNumber.txt");
+        pathUnevenNumber = Paths.get("C:\\task3UnEvenNumber.txt");
+        pathIncreasingOrder = Paths.get("C:\\task3IncreasingOrder.txt");
 
-        if (!CheckIsFileExist.addFileIfItDoNotExist(pathRead, pathEvenNumber, pathUnevenNumber)) {
-            writeToFile(pathRead);
+        String initialData = "22 55 11 2 ";
+
+        if (!CheckIsFileExist.addFileIfItDoNotExist(pathRead, pathEvenNumber, pathUnevenNumber, pathIncreasingOrder)) {
+            writeToFile(initialData);
         }
-        findNumbersFromFile(pathRead, pathEvenNumber, pathUnevenNumber);
+        parsingFile();
 
-        writeNumbersByOrder(pathEvenNumber, pathUnevenNumber, pathIncreasingOrder);
+        readNumberForm2Files();
+
+        writeNumbersByOrder();
     }
 
-    private static void writeToFile(Path path) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.toString()))) {
-            bufferedWriter.write("22 ");
+    /**
+     * Write initial data to file.
+     *
+     * @param initialData write to empty file.
+     */
+    private static void writeToFile(String initialData) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathRead.toString()))) {
+            bufferedWriter.write(initialData);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void findNumbersFromFile(Path pathRead, Path pathEvenNumber, Path pathUnevenNumber) {
-
+    /**
+     * Create BufferedReader stream and parsing data form file
+     */
+    private static void parsingFile() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathRead.toString()));
              DataOutputStream dataOutputStreamEvent = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(pathEvenNumber.toString())));
              DataOutputStream dataOutputStreamUneven = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(pathUnevenNumber.toString())))) {
 
-            StringBuilder sb = new StringBuilder();
-            StringBuilder sbSum = new StringBuilder();
+            StringBuilder sb = new StringBuilder(); // Store single character
+            StringBuilder sbNumber = new StringBuilder(); // Store number as single character '1' or  sequence of characters '11'
+            int codePoint = bufferedReader.read();
 
-            int i = bufferedReader.read();
-            if (i != -1) {
-                sb.appendCodePoint(i);
+            if (codePoint != -1) {
+                sb.appendCodePoint(codePoint);
 
-                while (i != -1) {
-                    if (i == 32) {
-
-                        writeNumbers(Integer.parseInt(sbSum.toString()), dataOutputStreamEvent, dataOutputStreamUneven);
-
-                        sbSum.delete(0, sbSum.length());
-
-                    } else {
-
-                        if (checkIsStringInt(sb.toString())) {
-                            sbSum.append(sb.toString());
-
-                        }
-                    }
-
+                while (codePoint != -1) {
+                    findNumbers(codePoint, sb, sbNumber, dataOutputStreamEvent, dataOutputStreamUneven);
                     sb.delete(0, 2);
-                    i = bufferedReader.read();
-                    if (i != -1) {
-                        sb.appendCodePoint(i);
+                    codePoint = bufferedReader.read();
+
+                    if (codePoint != -1) {
+                        sb.appendCodePoint(codePoint);
                     }
                 }
             } else {
                 System.out.println("Empty File");
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void writeNumbers(int i, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
+    /**
+     * Check if this code point is number.
+     *
+     * @param codePoint Code point
+     * @param sb        Single character
+     * @param sbNumber  Store number
+     */
+    public static void findNumbers(int codePoint, StringBuilder sb, StringBuilder sbNumber, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
 
+        if (codePoint == 32) { // check if this code point is space
+            writeNumbers(Integer.parseInt(sbNumber.toString()), dataOutputStreamEvent, dataOutputStreamUneven);
+            sbNumber.delete(0, sbNumber.length());
+
+        } else {
+            if (isNumber(sb.toString())) {
+                sbNumber.append(sb.toString());
+            }
+        }
+    }
+
+    /**
+     * Write number to even number file or uneven number file.
+     *
+     * @param i Number to write
+     */
+    private static void writeNumbers(int i, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
         try {
             if (i % 2 == 0) {
                 dataOutputStreamEvent.writeInt(i);
             } else {
                 dataOutputStreamUneven.writeInt(i);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    private static boolean checkIsStringInt(String s) {
-        boolean end = true;
+    /**
+     * Check if this string store number.
+     *
+     * @param s String of character
+     * @return true if this string store number
+     */
+    private static boolean isNumber(String s) {
+        boolean result = true;
         try {
             Integer.parseInt(s);
 
         } catch (NumberFormatException e) {
-            end = false;
+            result = false;
         }
-        return end;
+        return result;
     }
 
-    private static void writeNumbersByOrder(Path patEvenNumber, Path pathUnevenNumber, Path pathIncreasingOrder) {
-        try (DataInputStream dataInputStreamEven = new DataInputStream(new BufferedInputStream(new FileInputStream(patEvenNumber.toString())));
+    private static void readNumberForm2Files() {
+        try (DataInputStream dataInputStreamEven = new DataInputStream(new BufferedInputStream(new FileInputStream(pathEvenNumber.toString())));
              DataInputStream dataInputStreamUneven = new DataInputStream(new BufferedInputStream(new FileInputStream(pathUnevenNumber.toString())))) {
 
-            PriorityQueue<Integer> integers = new PriorityQueue<>();
 
             try {
                 while (dataInputStreamEven.available() > 0) {
                     integers.add(dataInputStreamEven.readInt());
+                }
+                while (dataInputStreamUneven.available() > 0) {
+                    integers.add(dataInputStreamUneven.readInt());
                 }
             } catch (EOFException e) {
                 e.printStackTrace();
             }
             System.out.println(integers.toString());
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private static void writeNumbersByOrder() {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathIncreasingOrder.toString()))) {
+            while (integers.peek() != null) {
+                bufferedWriter.write(String.valueOf(integers.poll()) + " ");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
