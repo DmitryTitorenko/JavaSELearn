@@ -96,7 +96,7 @@ public class Task3 {
      * @param sb        Single character
      * @param sbNumber  Store number
      */
-    public static void findNumbers(int codePoint, StringBuilder sb, StringBuilder sbNumber, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
+    private static void findNumbers(int codePoint, StringBuilder sb, StringBuilder sbNumber, DataOutputStream dataOutputStreamEvent, DataOutputStream dataOutputStreamUneven) {
 
         if (codePoint == 32) { // check if this code point is space
             writeNumbers(Integer.parseInt(sbNumber.toString()), dataOutputStreamEvent, dataOutputStreamUneven);
@@ -136,27 +136,24 @@ public class Task3 {
         boolean result = true;
         try {
             Integer.parseInt(s);
-
         } catch (NumberFormatException e) {
             result = false;
         }
         return result;
     }
 
+    /**
+     * Read  numbers form two files
+     */
     private static void readNumberForm2Files() {
         try (DataInputStream dataInputStreamEven = new DataInputStream(new BufferedInputStream(new FileInputStream(pathEvenNumber.toString())));
              DataInputStream dataInputStreamUneven = new DataInputStream(new BufferedInputStream(new FileInputStream(pathUnevenNumber.toString())))) {
 
-
-            try {
-                while (dataInputStreamEven.available() > 0) {
-                    integers.add(dataInputStreamEven.readInt());
-                }
-                while (dataInputStreamUneven.available() > 0) {
-                    integers.add(dataInputStreamUneven.readInt());
-                }
-            } catch (EOFException e) {
-                e.printStackTrace();
+            while (dataInputStreamEven.available() > 0) {
+                integers.add(dataInputStreamEven.readInt());
+            }
+            while (dataInputStreamUneven.available() > 0) {
+                integers.add(dataInputStreamUneven.readInt());
             }
             System.out.println(integers.toString());
 
@@ -165,6 +162,9 @@ public class Task3 {
         }
     }
 
+    /**
+     * Write numbers to text file use decrease order
+     */
     private static void writeNumbersByOrder() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathIncreasingOrder.toString()))) {
             while (integers.peek() != null) {
