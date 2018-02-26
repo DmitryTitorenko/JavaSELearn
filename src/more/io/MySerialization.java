@@ -10,15 +10,19 @@ import java.nio.file.Paths;
 public class MySerialization {
     public static void main(String[] args) {
 
-        Path path = Paths.get("C:\\SerializationPC.txt");
+        Path path = Paths.get("C:\\SerializationPC.data");
         CheckIsFileExist.addFileIfItDoNotExist(path);
-        serializationPC(path);
-        deserializationPC(path);
-    }
 
-    public static void serializationPC(Path path) {
         PC pc = new PC();
         pc.setCPU("AMD");
+        serializationPC(pc, path);
+
+        pc = deserializationPC(path);
+        System.out.println(pc.getCPU());
+    }
+
+    public static void serializationPC(PC pc, Path path) {
+
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path.toString()))) {
             objectOutputStream.writeObject(pc);
         } catch (IOException e) {
@@ -26,13 +30,14 @@ public class MySerialization {
         }
     }
 
-    public static void deserializationPC(Path path) {
+    public static PC deserializationPC(Path path) {
+        PC pc = null;
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path.toString()))) {
-            PC pc = (PC) objectInputStream.readObject();
-            System.out.println(pc.getCPU());
+            pc = (PC) objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return pc;
     }
 }
 

@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 public class MyDataStream {
     public static void main(String[] args) {
 
-        Path path = Paths.get("C:\\DataStream.txt");
+        Path path = Paths.get("C:\\DataStream.data");
         CheckIsFileExist.addFileIfItDoNotExist(path);
         writeStream(path);
         readStream(path);
